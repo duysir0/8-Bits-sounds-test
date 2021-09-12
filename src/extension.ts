@@ -17,10 +17,10 @@ let config: PlayerConfig = {
 };
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('Initializing "hacker-sounds" extension');
+    console.log('Initializing "8bit-sounds" extension');
 
     // is the extension activated? yes by default.
-    isActive = context.globalState.get('hacker_sounds', true);
+    isActive = context.globalState.get('8bit_sounds', true);
     config.macVol = context.globalState.get('mac_volume', 1);
     config.winVol = context.globalState.get('win_volume', 100);
     config.linuxVol = context.globalState.get('linux_volume', 1);
@@ -28,27 +28,27 @@ export function activate(context: vscode.ExtensionContext) {
     // to avoid multiple different instances
     listener = listener || new EditorListener(player);
     
-    vscode.commands.registerCommand('hacker_sounds.enable', () => {
+    vscode.commands.registerCommand('8bit_sounds.enable', () => {
         if(isActive){
-            vscode.window.showWarningMessage('Hacker Sounds extension is already enabled');
+            vscode.window.showWarningMessage('8bit Sounds extension is already enabled');
             return;
         }
-        context.globalState.update('hacker_sounds', true);
+        context.globalState.update('8bit_sounds', true);
         isActive = true;
-        vscode.window.showInformationMessage('Hacker Sounds extension enabled');
+        vscode.window.showInformationMessage('8bit Sounds extension enabled');
     });
-    vscode.commands.registerCommand('hacker_sounds.disable', () => {
+    vscode.commands.registerCommand('8bit_sounds.disable', () => {
         if(!isActive){
-            vscode.window.showWarningMessage('Hacker Sounds extension is already disabled');
+            vscode.window.showWarningMessage('8bit Sounds extension is already disabled');
             return;
         }
-        context.globalState.update('hacker_sounds', false);
+        context.globalState.update('8bit_sounds', false);
         isActive = false;
-        vscode.window.showInformationMessage('Hacker Sounds extension disabled');
+        vscode.window.showInformationMessage('8bit Sounds extension disabled');
 
     });
 
-    vscode.commands.registerCommand('hacker_sounds.volumeUp', () => {
+    vscode.commands.registerCommand('8bit_sounds.volumeUp', () => {
         let newVol = null;
 
         switch (process.platform) {
@@ -56,7 +56,7 @@ export function activate(context: vscode.ExtensionContext) {
                 config.macVol += 1;
 
                 if(config.macVol > 10){
-                    vscode.window.showWarningMessage('Hacker Sounds already at maximum volume');
+                    vscode.window.showWarningMessage('8bit Sounds already at maximum volume');
                     config.macVol = 10;
                 }
 
@@ -68,7 +68,7 @@ export function activate(context: vscode.ExtensionContext) {
                 config.winVol += 10;
 
                 if(config.winVol > 100){
-                    vscode.window.showWarningMessage('Hacker Sounds already at maximum volume');
+                    vscode.window.showWarningMessage('8bit Sounds already at maximum volume');
                     config.winVol = 100;
                 }
 
@@ -80,7 +80,7 @@ export function activate(context: vscode.ExtensionContext) {
                 config.linuxVol += 1;
 
                 if(config.linuxVol > 10){
-                    vscode.window.showWarningMessage('Hacker Sounds already at maximum volume');
+                    vscode.window.showWarningMessage('8bit Sounds already at maximum volume');
                     config.linuxVol = 10;
                 }
 
@@ -93,10 +93,10 @@ export function activate(context: vscode.ExtensionContext) {
                 break;
         }
 
-        vscode.window.showInformationMessage('Hacker Sounds volume raised: ' + newVol);
+        vscode.window.showInformationMessage('8bit Sounds volume raised: ' + newVol);
     });
 
-    vscode.commands.registerCommand('hacker_sounds.volumeDown', () => {
+    vscode.commands.registerCommand('8bit_sounds.volumeDown', () => {
         let newVol = null;
 
         switch (process.platform) {
@@ -104,7 +104,7 @@ export function activate(context: vscode.ExtensionContext) {
                 config.macVol -= 1;
 
                 if(config.macVol < 1){
-                    vscode.window.showWarningMessage('Hacker Sounds already at minimum volume');
+                    vscode.window.showWarningMessage('8bit Sounds already at minimum volume');
                     config.macVol = 1;
                 }
 
@@ -116,7 +116,7 @@ export function activate(context: vscode.ExtensionContext) {
                 config.winVol -= 10;
 
                 if(config.winVol < 10){
-                    vscode.window.showWarningMessage('Hacker Sounds already at minimum volume');
+                    vscode.window.showWarningMessage('8bit Sounds already at minimum volume');
                     config.winVol = 10;
                 }
 
@@ -128,7 +128,7 @@ export function activate(context: vscode.ExtensionContext) {
                 config.linuxVol -= 1;
 
                 if(config.linuxVol < 1){//TODO: maybe show the message if the volumn is already 1 and break;
-                    vscode.window.showWarningMessage('Hacker Sounds already at minimum volume');
+                    vscode.window.showWarningMessage('8bit Sounds already at minimum volume');
                     config.linuxVol = 1;
                 }
 
@@ -141,7 +141,7 @@ export function activate(context: vscode.ExtensionContext) {
                 break;
         }
 
-        vscode.window.showInformationMessage('Hacker Sounds volume lowered: ' + newVol);
+        vscode.window.showInformationMessage('8bit Sounds volume lowered: ' + newVol);
     });
 
     // Add to a list of disposables which are disposed when this extension is deactivated.

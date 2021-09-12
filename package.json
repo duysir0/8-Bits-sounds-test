@@ -1,8 +1,8 @@
 {
-    "name": "hacker-sounds",
+    "name": "8bit-sounds",
     "publisher": "mattogodoy",
-    "displayName": "Hacker Sounds",
-    "description": "This extension automatically turns you into a very skilled hacker by playing movie-like sounds while you write code.",
+    "displayName": "8bit Sounds",
+    "description": "This extension automatically turns you into a very skilled 8bit by playing movie-like sounds while you write code.",
     "version": "1.3.0",
     "engines": {
         "vscode": "^1.40.0"
@@ -10,12 +10,12 @@
     "homepage": "https://matto.io",
     "repository": {
         "type": "git",
-        "url": "https://github.com/mattogodoy/hacker-sounds"
+        "url": "https://github.com/mattogodoy/8bit-sounds"
     },
     "keywords": [
         "sound",
         "keyboard",
-        "hacker",
+        "8bit",
         "fx",
         "sci-fi"
     ],
@@ -31,20 +31,20 @@
     "contributes": {
         "commands": [
             {
-                "command": "hacker_sounds.enable",
-                "title": "Hacker Sounds: Enable"
+                "command": "8bit_sounds.enable",
+                "title": "8bit Sounds: Enable"
             },
             {
-                "command": "hacker_sounds.disable",
-                "title": "Hacker Sounds: Disable"
+                "command": "8bit_sounds.disable",
+                "title": "8bit Sounds: Disable"
             },
             {
-                "command": "hacker_sounds.volumeUp",
-                "title": "Hacker Sounds: Volume Up"
+                "command": "8bit_sounds.volumeUp",
+                "title": "8bit Sounds: Volume Up"
             },
             {
-                "command": "hacker_sounds.volumeDown",
-                "title": "Hacker Sounds: Volume Down"
+                "command": "8bit_sounds.volumeDown",
+                "title": "8bit Sounds: Volume Down"
             }
         ]
     },
