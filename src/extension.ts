@@ -1,10 +1,11 @@
-// The module 'vscode' contains the VS Code extensibility API
+// Thes module 'vcode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 'use strict';
 import * as vscode from 'vscode';
 import * as path from 'path';
-import player, { PlayerConfig } from './player';
+import { isContext } from 'vm';
 import debounce = require('lodash.debounce');
+import player, { PlayerConfig } from './player';
 
 let listener: EditorListener;
 let isActive: boolean;
@@ -26,25 +27,27 @@ export function activate(context: vscode.ExtensionContext) {
 
     // to avoid multiple different instances
     listener = listener || new EditorListener(player);
-
+    
     vscode.commands.registerCommand('hacker_sounds.enable', () => {
-        if (!isActive) {
-            context.globalState.update('hacker_sounds', true);
-            isActive = true;
-            vscode.window.showInformationMessage('Hacker Sounds extension enabled');
-        } else {
+        if(isActive){
             vscode.window.showWarningMessage('Hacker Sounds extension is already enabled');
+            return;
         }
+        context.globalState.update('hacker_sounds', true);
+        isActive = true;
+        vscode.window.showInformationMessage('Hacker Sounds extension enabled');
     });
     vscode.commands.registerCommand('hacker_sounds.disable', () => {
-        if (isActive) {
-            context.globalState.update('hacker_sounds', false);
-            isActive = false;
-            vscode.window.showInformationMessage('Hacker Sounds extension disabled');
-        } else {
+        if(!isActive){
             vscode.window.showWarningMessage('Hacker Sounds extension is already disabled');
+            return;
         }
+        context.globalState.update('hacker_sounds', false);
+        isActive = false;
+        vscode.window.showInformationMessage('Hacker Sounds extension disabled');
+
     });
+
     vscode.commands.registerCommand('hacker_sounds.volumeUp', () => {
         let newVol = null;
 
@@ -92,6 +95,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         vscode.window.showInformationMessage('Hacker Sounds volume raised: ' + newVol);
     });
+
     vscode.commands.registerCommand('hacker_sounds.volumeDown', () => {
         let newVol = null;
 
@@ -123,7 +127,7 @@ export function activate(context: vscode.ExtensionContext) {
             case 'linux':
                 config.linuxVol -= 1;
 
-                if(config.linuxVol < 1){
+                if(config.linuxVol < 1){//TODO: maybe show the message if the volumn is already 1 and break;
                     vscode.window.showWarningMessage('Hacker Sounds already at minimum volume');
                     config.linuxVol = 1;
                 }
@@ -147,9 +151,7 @@ export function activate(context: vscode.ExtensionContext) {
 // this method is called when your extension is deactivated
 export function deactivate() {}
 
-/**
- * Listen to editor changes and play a sound when a key is pressed.
- */
+// Listen to editor changes and play a sound when a key is pressed.
 export class EditorListener {
     private _disposable: vscode.Disposable;
     private _subscriptions: vscode.Disposable[] = [];
@@ -185,54 +187,45 @@ export class EditorListener {
         isNotArrowKey = true;
         let pressedKey = event.contentChanges[0].text;
 
-        switch (pressedKey) {
-            case '':
+        switch (pressedKey) { // TODO: get off of this switch cae
+            case '': // text cut
                 if(event.contentChanges[0].rangeLength === 1){
                     // backspace or delete pressed
                     this.player.play(this._deleteAudio);
-                } else {
-                    // text cut
-                    this.player.play(this._cutAudio);
-                }
+                    break;
+                } 
+                
+                this.player.play(this._cutAudio);
                 break;
 
-            case ' ':
-                // space bar pressed
+            case ' ': // space bar pressed
+                
                 this.player.play(this._spaceAudio);
                 break;
 
-            case '\n':
-                // enter pressed
+            case '\n': // enter pressed
                 this.player.play(this._enterAudio);
                 break;
 
-            case '\t':
+            case '\t': // tab pressed
             case '  ':
             case '    ':
-                // tab pressed
                 this.player.play(this._tabAudio);
                 break;
 
             default:
                 let textLength = pressedKey.trim().length;
-
-                switch (textLength) {
-                    case 0:
-                        // user hit Enter while indented
-                        this.player.play(this._enterAudio);
-                        break;
-
-                    case 1:
-                        // it's a regular character
-                        this.player.play(this._otherKeysAudio);
-                        break;
-
-                    default:
-                        // text pasted
-                        this.player.play(this._pasteAudio);
-                        break;
+                
+                if(textLength === 0){
+                    this.player.play(this._enterAudio);
+                    return;
                 }
-                break;
+                if(textLength === 1){
+                    this.player.play(this._otherKeysAudio);
+                    return;
+                }
+                this.player.play(this._pasteAudio);
+                return;
         }
     }, 100, { leading: true });
 
@@ -246,9 +239,10 @@ export class EditorListener {
         // check if there is no selection
         if (editor.selection.isEmpty && isNotArrowKey === false) {
             this.player.play(this._arrowsAudio);
-        } else {
-            isNotArrowKey = false;
+            return;
         }
+        isNotArrowKey = false;
+        
     }, 100, { leading: true });
 
     dispose() {

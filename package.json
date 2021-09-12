@@ -64,11 +64,12 @@
         "glob": "^7.1.5",
         "mocha": "^6.2.2",
         "tslint": "^5.20.0",
-        "typescript": "^3.6.4",
+        "typescript": "^3.9.10",
         "vscode-test": "^1.2.2"
     },
     "dependencies": {
         "lodash.debounce": "^4.0.8",
+        "path": "^0.12.7",
         "play-sound": "^1.1.3"
     }
 }

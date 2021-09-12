@@ -25,15 +25,16 @@ export default {
             if (_isWindows) {
                 cp.execFile(_playerWindowsPath, ['/vol', config.winVol, filePath]);
                 resolve();
-            } else {
-                player.play(filePath, playerAdapter(config), (err: any) => {
+                return;
+            } 
+            player.play(filePath, playerAdapter(config), (err: any) => {
                 if (err) {
                     console.error("Error playing sound:", filePath, " - Description:", err);
                     return reject(err);
                 }
-                    resolve();
-                });
-            }
+                resolve();
+            });
+            
         });
     }
 };
