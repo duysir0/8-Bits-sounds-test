@@ -146,6 +146,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Add to a list of disposables which are disposed when this extension is deactivated.
     context.subscriptions.push(listener);
+
 }
 
 // this method is called when your extension is deactivated
@@ -158,18 +159,21 @@ export class EditorListener {
     private _basePath: string = path.join(__dirname, '..');
 
     // Audio files
-    private _spaceAudio: string = path.join(this._basePath, 'audio', 'spacebar.wav');
-    private _deleteAudio: string = path.join(this._basePath, 'audio', 'delete.wav');
-    private _otherKeysAudio: string = path.join(this._basePath, 'audio', 'key.wav');
-    private _cutAudio: string = path.join(this._basePath, 'audio', 'cut.wav');
-    private _pasteAudio: string = path.join(this._basePath, 'audio', 'paste.wav');
-    private _enterAudio: string = path.join(this._basePath, 'audio', 'enter.wav');
-    private _tabAudio: string = path.join(this._basePath, 'audio', 'tab.wav');
-    private _arrowsAudio: string = path.join(this._basePath, 'audio', 'arrow.wav');
+    private _deleteAudio: string = path.join(this._basePath, 'audio', 'backspace.wav');
+    private _pasteAudio: string = path.join(this._basePath, 'audio', 'key_var_2.wav');
+    private _otherKeysAudio: string = path.join(this._basePath, 'audio', 'key_var_6.wav');
+    private _enterAudio: string = path.join(this._basePath, 'audio', 'key_var_4.wav');
+    private _spaceAudio: string = path.join(this._basePath, 'audio', 'key_var_5.wav');
+    private _tabAudio: string = path.join(this._basePath, 'audio', 'key_var_5.wav');
+    private _arrowsAudio: string = path.join(this._basePath, 'audio', 'key_var_3.wav');
+    private _opanBracketAudio: string = path.join(this._basePath, 'audio', 'bracket.wav');
+    private _closeBracketAudio: string = path.join(this._basePath, 'audio', 'close_bracket.wav');
+    private _chavesAudio: string = path.join(this._basePath, 'audio', 'chaves.wav');
 
     constructor(private player: any) {
         isNotArrowKey = false;
-
+        vscode.window.showWarningMessage('Loading');
+        
         vscode.workspace.onDidChangeTextDocument(this._keystrokeCallback, this, this._subscriptions);
         vscode.window.onDidChangeTextEditorSelection(this._arrowKeysCallback, this, this._subscriptions);
         this._disposable = vscode.Disposable.from(...this._subscriptions);
@@ -188,16 +192,23 @@ export class EditorListener {
         let pressedKey = event.contentChanges[0].text;
 
         switch (pressedKey) { // TODO: get off of this switch cae
-            case '': // text cut
-                if(event.contentChanges[0].rangeLength === 1){
-                    // backspace or delete pressed
-                    this.player.play(this._deleteAudio);
-                    break;
-                } 
-                
-                this.player.play(this._cutAudio);
+            case '[]':
+            case '()':
+                this.player.play(this._opanBracketAudio);
                 break;
+            case ']':
+            case ')':
+                this.player.play(this._closeBracketAudio);
+                break;
+            case '{}':
+            case '}':
+                this.player.play(this._chavesAudio);
 
+            case '': // text cut or backspace
+                this.player.play(this._deleteAudio);
+                break;
+                // if(event.contentChanges[0].rangeLength === 1){
+                
             case ' ': // space bar pressed
                 
                 this.player.play(this._spaceAudio);
@@ -227,23 +238,24 @@ export class EditorListener {
                 this.player.play(this._pasteAudio);
                 return;
         }
-    }, 100, { leading: true });
+    }, 30, { leading: true });
 
     _arrowKeysCallback = debounce((event: vscode.TextEditorSelectionChangeEvent) => {
         if (!isActive){ return; }
 
         // current editor
+
         const editor = vscode.window.activeTextEditor;
         if (!editor || editor.document !== event.textEditor.document) { return; }
 
         // check if there is no selection
-        if (editor.selection.isEmpty && isNotArrowKey === false) {
+        if (editor.selection.isEmpty && !isNotArrowKey) {
             this.player.play(this._arrowsAudio);
             return;
         }
         isNotArrowKey = false;
         
-    }, 100, { leading: true });
+    }, 30, { leading: true });
 
     dispose() {
         this._disposable.dispose();

@@ -1,8 +1,8 @@
 # 8bit-sounds
 
-[![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/v/mattogodoy.8bit-sounds.svg)](https://marketplace.visualstudio.com/items?itemName=mattogodoy.8bit-sounds)
-[![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/d/mattogodoy.8bit-sounds.svg)](https://marketplace.visualstudio.com/items?itemName=mattogodoy.8bit-sounds)
-[![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/r/mattogodoy.8bit-sounds.svg)](https://marketplace.visualstudio.com/items?itemName=mattogodoy.8bit-sounds)
+<a href="https://gitmoji.carloscuesta.me">
+<img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat" alt="Gitmoji">
+</a>
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jengjeng/aural-coding-vscode/blob/master/LICENSE)
 
 This Visual Studio Code extension to play old video-game sounds when you type :3.
