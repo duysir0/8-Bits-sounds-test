@@ -6,9 +6,6 @@ const _isWindows = process.platform === 'win32';
 const _playerWindowsPath = path.join(__dirname, '..', 'audio', 'sounder.exe');
 
 export interface PlayerConfig {
-    /**
-     * Specify volume of the sounds
-     */
     macVol: number;
     winVol: number;
     linuxVol: number;
@@ -34,7 +31,6 @@ export default {
                 }
                 resolve();
             });
-            
         });
     }
 };

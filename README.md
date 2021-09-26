@@ -11,7 +11,7 @@
 </p>
 
 This Visual Studio Code extension to play old video-game sounds when you type ⌨️🔊.
-> This is a fork from [hacker sounds]
+> This is a fork from [hacker sounds](https://github.com/mattogodoy/hacker-sounds/)
 
 
 ### 📝Task List:
@@ -49,7 +49,7 @@ No special requirements.
 
 Run `code --install-extension RenatoCesarF.8-bits-sounds`
 
-or search [8-bits-sounds](https://marketplace.visualstudio.com/items?itemName=RenatoCesarF.8bit-sounds) in Extensions Marketplace.
+or search [8 Bits Sounds](https://marketplace.visualstudio.com/items?itemName=RenatoCesarF.8-bits-sounds) in Extensions Marketplace.
 
 ## 📝How to use
 
