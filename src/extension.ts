@@ -172,7 +172,7 @@ export class EditorListener {
 
     constructor(private player: any) {
         isNotArrowKey = false;
-        vscode.window.showWarningMessage('Loading');
+        vscode.window.showInformationMessage('Loading');
         
         vscode.workspace.onDidChangeTextDocument(this._keystrokeCallback, this, this._subscriptions);
         vscode.window.onDidChangeTextEditorSelection(this._arrowKeysCallback, this, this._subscriptions);

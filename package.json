@@ -17,7 +17,14 @@
         "keyboard",
         "8bit",
         "fx",
-        "sci-fi"
+        "sci-fi",
+        "video-game",
+        "videogame",
+        "atari",
+        "old vide game",
+        "mario",
+        "sounds",
+        "key"
     ],
     "icon": "icon.png",
     "license": "MIT",

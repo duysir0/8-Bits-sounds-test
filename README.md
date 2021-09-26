@@ -33,7 +33,7 @@ sudo pacman -S mplayer
 
 No special requirements.
 
-## Installation
+## Installation NOT READY YET
 
 Run `code --install-extension mattogodoy.8bit-sounds`
 
@@ -60,6 +60,8 @@ You can adjust the volume of the sounds by executing these commands in the Comma
 ## Known Issues & Bugs
 
 The extension is in a very early stage. Please report any issues / bugs you find.
+
+It take some seconds before it starts to work
 
 ## Contributing
 
