@@ -16,6 +16,8 @@ This Visual Studio Code extension to play old video-game sounds when you type �
 
 ### 📝Task List:
 - [ ] Add more sounds
+- [ ] Improve Logo
+- [ ] A Better way to play the souds
 - [ ] Add configurations to choose which sound you want in each type of key
 - [ ] Any idea to improve this extension is welcome 😊
 
@@ -43,11 +45,11 @@ sudo pacman -S mplayer
 ### Windows and Mac
 No special requirements.
 
-## 💽 Installation NOT READY YET
+## 💽 Installation
 
-Run `code --install-extension mattogodoy.8bit-sounds`
+Run `code --install-extension RenatoCesarF.8-bits-sounds`
 
-or search [8-bit Sounds]() in Extensions Marketplace.
+or search [8-bits-sounds](https://marketplace.visualstudio.com/items?itemName=RenatoCesarF.8bit-sounds) in Extensions Marketplace.
 
 ## 📝How to use
 
