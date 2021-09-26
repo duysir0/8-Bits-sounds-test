@@ -1,6 +1,5 @@
-# 8bit-sounds
 <p align='center'>
-  <img src="https://user-images.githubusercontent.com/62253156/134821542-478d510a-aed5-4959-aeda-ae2b7fa3c05a.png" width="250" height="250" />
+  <img src="https://user-images.githubusercontent.com/62253156/134823669-bc217b0d-67d3-4fb3-8bdb-345c47ba02e4.png" width="600" height="202"/>
 </p>
 
 <p align='center'>
@@ -12,11 +11,12 @@
 </p>
 
 This Visual Studio Code extension to play old video-game sounds when you type ⌨️🔊.
-> This is a fork from [hacker sounds](https://github.com/mattogodoy/hacker-sounds/)
+> This is a fork from [hacker sounds]
+
 
 ### 📝Task List:
 - [ ] Add more sounds
-- [ ] Improve Logo
+- [x] Improve Logo
 - [ ] A Better way to play the souds
 - [ ] Add configurations to choose which sound you want in each type of key
 - [ ] Any idea to improve this extension is welcome 😊
