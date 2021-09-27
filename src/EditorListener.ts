@@ -7,13 +7,14 @@ import {
     TextDocumentChangeEvent,
 } from 'vscode';
 import debounce = require('lodash.debounce');
-import { PlayerConfig } from './player';
+import player, { PlayerConfig } from './player';
 
 let isArrowKey: boolean = true;
 
 
 
 export class EditorListener {
+    private _player: any;
     private _isActive: boolean;
     private _disposable: Disposable;
     private _subscriptions: Disposable[] = [];
@@ -31,14 +32,14 @@ export class EditorListener {
     private _chavesAudio: string = "";
     
 
-    constructor(private player: any, isActive: boolean, configuration: PlayerConfig) {
+    constructor(isActive: boolean, configuration: PlayerConfig) {
         this._disposable = Disposable.from(...this._subscriptions);
         this._isActive = isActive;
         
         if(!this._isActive){return;}
         
         this._loadAudioFiles();
-        this.player = {
+        this._player = {
             play: (filePath: string) => player.play(filePath, configuration)
         };
         
@@ -62,13 +63,14 @@ export class EditorListener {
 
     _arrowKeysCallback = debounce((event: TextEditorSelectionChangeEvent) => {
         if(!this._isActive){return;}
+        
         const currentEditor = this.getActiveEditor();
 
         if (!currentEditor || currentEditor.document !== event.textEditor.document) { return; }
 
         // check if there is no selection
         if (currentEditor.selection.isEmpty && isArrowKey) {
-            this.player.play(this._arrowsAudio);
+            this._player.play(this._arrowsAudio);
             return;
         }
         isArrowKey = true;
@@ -81,61 +83,50 @@ export class EditorListener {
             case '()':
             case '[':
             case '(':
-                this.player.play(this._opanBracketAudio);
+                this._player.play(this._opanBracketAudio);
                 break;
             case ']':
             case ')':
-                this.player.play(this._closeBracketAudio);
+                this._player.play(this._closeBracketAudio);
                 break;
             case '{}':
             case '{':
             case '}':
-                this.player.play(this._chavesAudio);
+                this._player.play(this._chavesAudio);
 
             case '': // text cut or backspace
-                this.player.play(this._deleteAudio);
+                this._player.play(this._deleteAudio);
                 break;
                 // if(event.contentChanges[0].rangeLength === 1){
                 
             case ' ': // space bar pressed
-                this.player.play(this._spaceAudio);
+                this._player.play(this._spaceAudio);
                 break;
 
             case '\n': // enter pressed
-                this.player.play(this._enterAudio);
+                this._player.play(this._enterAudio);
                 break;
 
             case '\t': // tab pressed
             case '  ':                                  
             case '    ':
-                this.player.play(this._tabAudio);
+                this._player.play(this._tabAudio);
                 break;
 
             default:
                 let textLength = pressedKey.trim().length;
                 
                 if(textLength === 0){
-                    this.player.play(this._enterAudio);
+                    this._player.play(this._enterAudio);
                     return;
                 }
                 if(textLength === 1){
-                    this.player.play(this._otherKeysAudio);
+                    this._player.play(this._otherKeysAudio);
                     return;
                 }
-                this.player.play(this._pasteAudio);
+                this._player.play(this._pasteAudio);
                 return;
         }
-    }
-
-    getActiveEditor(){
-        return window.activeTextEditor 
-    }
-
-    enable(){
-        this._isActive = true;
-    }
-    desable(){
-        this._isActive = false;
     }
 
     _loadAudioFiles(){
@@ -150,6 +141,19 @@ export class EditorListener {
         this._closeBracketAudio= join(this._basePath, 'audio', 'close_bracket.wav');
         this._chavesAudio= join(this._basePath, 'audio', 'chaves.wav');
     }
+
+    getActiveEditor(){
+        return window.activeTextEditor 
+    }
+
+    enable(){
+        this._isActive = true;
+    }
+    
+    desable(){
+        this._isActive = false;
+    }
+
 
     dispose() {
         this._disposable.dispose();
