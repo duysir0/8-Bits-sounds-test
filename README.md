@@ -2,20 +2,25 @@
   <img src="https://user-images.githubusercontent.com/62253156/134823669-bc217b0d-67d3-4fb3-8bdb-345c47ba02e4.png" width="600" height="202"/>
 </p>
 
-<p align='center'>
-  <a href="https://gitmoji.carloscuesta.me">
-    <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat" alt="Gitmoji">
+<p align= 'center'>
+  <a href="https://marketplace.visualstudio.com/items?itemName=RenatoCesarF.8-bits-sounds">
+    <img src="https://img.shields.io/vscode-marketplace/v/RenatoCesarF.8-bits-sounds.svg">
+    <img src="https://img.shields.io/vscode-marketplace/d/RenatoCesarF.8-bits-sounds.svg">
+    <img src="https://img.shields.io/vscode-marketplace/r/RenatoCesarF.8-bits-sounds.svg">
+  
   </a>
-
-  <img src="https://img.shields.io/badge/Video--Games-%F0%9F%8E%AE-red?style=flat-square">
+  <a href="https://gitmoji.carloscuesta.me">
+      <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat" alt="Gitmoji">
+  </a>
 </p>
 
-This Visual Studio Code extension to play old video-game sounds when you type ⌨️🔊.
+
+## Visual Studio Code extension to play old video-game sounds when you type ⌨️🔊.
 > This is a fork from [hacker sounds](https://github.com/mattogodoy/hacker-sounds/)
 
 
 ### 📝Task List:
-- [ ] Add more sounds
+- [x] Get Better sonds
 - [x] Improve Logo
 - [ ] A Better way to play the souds
 - [ ] Add configurations to choose which sound you want in each type of key
