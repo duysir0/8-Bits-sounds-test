@@ -129,17 +129,18 @@ export class EditorListener {
         }
     }
 
+    
     _loadAudioFiles(){
         this._deleteAudio= join(this._basePath, 'audio', 'backspace.wav');
-        this._enterAudio=  join(this._basePath, 'audio', 'key_var_1.wav');
-        this._pasteAudio= join(this._basePath, 'audio', 'key_var_2.wav');
-        this._arrowsAudio= join(this._basePath, 'audio', 'key_var_3.wav');
-        this._tabAudio= join(this._basePath, 'audio', 'key_var_4.wav');
-        this._spaceAudio= join(this._basePath, 'audio', 'key_var_5.wav');      
-        this._otherKeysAudio= join(this._basePath, 'audio', 'key_var_6.wav');
+        this._enterAudio=  join(this._basePath, 'audio', 'enter_sound.wav');
+        this._spaceAudio= join(this._basePath, 'audio', 'space_sound.wav');      
+        this._otherKeysAudio= join(this._basePath, 'audio', 'normal_key_sound.wav');
         this._opanBracketAudio= join(this._basePath, 'audio', 'bracket.wav');
         this._closeBracketAudio= join(this._basePath, 'audio', 'close_bracket.wav');
         this._chavesAudio= join(this._basePath, 'audio', 'chaves.wav');
+        this._pasteAudio= join(this._basePath, 'audio', 'key_var_2.wav');
+        this._arrowsAudio= join(this._basePath, 'audio','key_var_2.wav'); //'key_var_3.wav');
+        this._tabAudio= join(this._basePath, 'audio', 'key_var_4.wav');
     }
 
     getActiveEditor(){
