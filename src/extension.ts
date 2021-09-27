@@ -2,7 +2,7 @@
 
 import { window,ExtensionContext, commands} from 'vscode';
 import { EditorListener } from './EditorListener';
-import player, { PlayerConfig } from './player';
+import { PlayerConfig } from './player';
 
 let listener: EditorListener;
 let isActive: boolean;
@@ -12,6 +12,12 @@ let config: PlayerConfig = {
     winVol: 100,
     linuxVol: 100
 };
+
+enum OperionalSystem{
+    Darwin = 'darwin',
+    Windows = 'win32',
+    Linux ='linux',
+}
 
 
 export function activate(context: ExtensionContext) {
@@ -23,27 +29,20 @@ export function activate(context: ExtensionContext) {
     config.winVol = context.globalState.get('win_volume', 100);
     config.linuxVol = context.globalState.get('linux_volume', 1);
 
+    // this.os = new OperationalSystem(process.platform)
     // to avoid multiple different instances
-    listener = listener || new EditorListener(player, isActive, config);
+    listener = listener || new EditorListener(isActive, config);
     
     commands.registerCommand('8bit_sounds.enable', () => {
-        // if(isActive){
-        //     window.showWarningMessage('8bit Sounds extension is already enabled');
-        //     return;
-        // }
         context.globalState.update('8bit_sounds', true);
         listener.enable();
         window.showInformationMessage('8bit Sounds extension enabled');
     });
+
     commands.registerCommand('8bit_sounds.disable', () => {
-        // if(!isActive){
-        //     window.showWarningMessage('8bit Sounds extension is already disabled');
-        //     return;
-        // }
         context.globalState.update('8bit_sounds', false);
         listener.desable();
         window.showInformationMessage('8bit Sounds extension disabled');
-
     });
 
     commands.registerCommand('8bit_sounds.volumeUp', () => {
@@ -147,4 +146,6 @@ export function activate(context: ExtensionContext) {
 
 }
 
-export function deactivate() {}
+export function deactivate() {
+    listener.dispose();
+}

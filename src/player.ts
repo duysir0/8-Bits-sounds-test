@@ -23,7 +23,7 @@ export default {
                 cp.execFile(_playerWindowsPath, ['/vol', config.winVol, filePath]);
                 resolve();
                 return;
-            } 
+            }
             player.play(filePath, playerAdapter(config), (err: any) => {
                 if (err) {
                     console.error("Error playing sound:", filePath, " - Description:", err);

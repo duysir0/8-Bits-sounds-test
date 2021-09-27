@@ -2,7 +2,7 @@
     "name": "8-bits-sounds",
     "publisher": "RenatoCesarF",
     "displayName": "8 Bits Sounds",
-    "description": "Visual Studio Code extension that plays 8bits sounds when you type ⌨️🔊",
+    "description": "Visual Studio Code extension that plays 8-Bits sounds when you type ⌨️🔊",
     "version": "0.3.8",
     "engines": {
         "vscode": "^1.40.0"
